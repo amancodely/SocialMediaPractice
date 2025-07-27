@@ -52,10 +52,10 @@ const ScrollExampleAdvanced = () => {
         ref={scrollViewRef}
         style={styles.scrollView}
         contentContainerStyle={styles.contentContainer}
-        onScroll={handleScroll2}
+        onScroll={handleScroll}
         showsVerticalScrollIndicator={true}
       >
-        {/* Content above initial view */}
+        {/* Content above  initial view */}
         <View style={[styles.section, { height: screenHeight }]}>
           <Text style={styles.text}>hello2</Text>
           <Text style={styles.subText}>
