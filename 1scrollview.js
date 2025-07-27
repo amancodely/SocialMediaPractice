@@ -28,31 +28,13 @@ const ScrollExampleAdvanced = () => {
     setScrollY(currentScrollY);
   };
 
-  const handleScroll2 = (event) => {
-    const currentScrollY = event.nativeEvent.contentOffset.y;
-    setScrollY(currentScrollY);
-  
-    // Check if the user has scrolled 1/3 of the screen height
-    if (currentScrollY >= screenHeight / 3) {
-      scrollViewRef.current?.scrollTo({
-        y: screenHeight, // Scroll to the second page
-        animated: true,
-      });
-    } else if (currentScrollY < screenHeight / 3) {
-      scrollViewRef.current?.scrollTo({
-        y: 0, // Scroll back to the first page
-        animated: true,
-      });
-    }
-  };
-
   return (
     <View style={styles.container}>
       <ScrollView
         ref={scrollViewRef}
         style={styles.scrollView}
         contentContainerStyle={styles.contentContainer}
-        onScroll={handleScroll2}
+        onScroll={handleScroll}
         showsVerticalScrollIndicator={true}
       >
         {/* Content above initial view */}
