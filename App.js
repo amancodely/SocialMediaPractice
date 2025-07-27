@@ -1,37 +1,120 @@
-import React from 'react';
-import {SafeAreaView, TouchableOpacity, View, Text} from 'react-native';
-import Title from './components/Title/Title';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faEnvelope} from '@fortawesome/free-solid-svg-icons';
-import globalStyle from './assets/styles/globalStyle';
-const App = () => {
-  return (
-    <SafeAreaView>
-      <View style={globalStyle.header}>
-        <Title title={'Let’s Explore'} />
-        <TouchableOpacity style={globalStyle.messageIcon}>
-          <FontAwesomeIcon icon={faEnvelope} size={20} color={'#898DAE'} />
-          <View style={globalStyle.messageNumberContainer}>
-            <Text style={globalStyle.messageNumber}>2</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <View style={{    flexDirection: 'row', marginLeft:24,justifyContent:'flex-end'}}>
-        <View style={{  flexDirection: 'row',flex: 3 }}>
-        <Text style={{fontSize:30}}>hello</Text>
-        <Text style={{fontSize:30}}> hello2</Text>
+import React, { useRef, useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
 
+const { height: screenHeight } = Dimensions.get('window');
+
+const ScrollExampleAdvanced = () => {
+  const scrollViewRef = useRef(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  // useEffect(() => {
+  //   // Set initial position after component mounts
+  //   setTimeout(() => {
+  //     scrollViewRef.current?.scrollTo({
+  //       y: screenHeight,
+  //       animated: false,
+  //     });
+  //   }, 100);
+  // }, []);
+
+  const handleScroll = (event) => {
+    const currentScrollY = event.nativeEvent.contentOffset.y;
+    setScrollY(currentScrollY);
+  };
+
+  return (
+    <View style={styles.container}>
+      <ScrollView
+        ref={scrollViewRef}
+        style={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+        showsVerticalScrollIndicator={true}
+      >
+        {/* Content above initial view */}
+        <View style={[styles.section, { height: screenHeight }]}>
+          <Text style={styles.text}>hello2</Text>
+          <Text style={styles.subText}>
+            (Scroll up to see this!)
+          </Text>
         </View>
         
-        <View style={{}}>
-        <FontAwesomeIcon icon={faEnvelope} size={20} color={'#898DAE'} />
-
+        {/* Initial view */}
+        <View style={[styles.section, { height: screenHeight }]}>
+          <Text style={styles.text}>hello</Text>
+          <Text style={styles.subText}>
+            (Initial text in middle)
+          </Text>
         </View>
-
-
+        
+        {/* Additional content below */}
+        <View style={[styles.section, { height: screenHeight }]}>
+          <Text style={styles.text}>More content...</Text>
+          <Text style={styles.subText}>
+            (Scroll down to see this!)
+          </Text>
+        </View>
+      </ScrollView>
+      
+      {/* Debug info */}
+      <View style={styles.debugInfo}>
+        <Text style={styles.debugText}>
+          Scroll Y: {Math.round(scrollY)}
+        </Text>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+  scrollView: {
+    flex: 1,
+  },
+  contentContainer: {
+    alignItems: 'center',
+  },
+  section: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  text: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#2c3e50',
+    marginBottom: 10,
+  },
+  subText: {
+    fontSize: 16,
+    color: '#7f8c8d',
+    fontStyle: 'italic',
+  },
+  debugInfo: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    padding: 10,
+    borderRadius: 5,
+  },
+  debugText: {
+    color: 'white',
+    fontSize: 12,
+  },
+});
+
+export default ScrollExampleAdvanced;
