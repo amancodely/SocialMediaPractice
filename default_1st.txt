@@ -1,0 +1,24 @@
+import React, { useRef, useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
+
+const { height: screenHeight } = Dimensions.get('window');
+
+const ScrollExampleAdvanced = () => {
+  const scrollViewRef = useRef(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  return (
+    <View>
+      <Text>testing</Text>
+    </View>
+  );
+ 
+}
+
+export default ScrollExampleAdvanced;

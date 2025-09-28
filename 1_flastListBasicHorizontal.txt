@@ -69,9 +69,6 @@ const ScrollExampleAdvanced = () => {
       renderItem={renderItem} // Function to render each item
       keyExtractor={(item) => item.id} // Unique key for each item
     />
-    <View>
-      <Text>testing32</Text>
-    </View>
 
 
 
