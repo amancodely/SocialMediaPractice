@@ -1,0 +1,12 @@
+   <TextInput
+        style={{height: 40, padding: 5}}
+        placeholder="Type here to translate!"
+        onChangeText={prev => setText(newText)}
+        defaultValue={text}
+      />
+      <TextInput
+            style={styles.input}      
+                placeholder="Type here..."
+                value={text}
+                onChangeText={setText}
+            />
